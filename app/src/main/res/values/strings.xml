@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">ProyectoPIE</string>
+    <string name="str_princip">Bienvenido/a al super test de informática</string>
+    <string name="str_pistaNombre">Introduce tu nombre</string>
+    <string name="str_btInicio">Iniciar test</string>
+</resources>
