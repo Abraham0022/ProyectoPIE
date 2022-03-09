@@ -25,6 +25,7 @@ public class ActivityPreguntas extends AppCompatActivity {
         textView.setText(nombre);
 
         String hola ="hola Abraham!!!";
+        String adios ="adiossssssss";
 
 
     }
