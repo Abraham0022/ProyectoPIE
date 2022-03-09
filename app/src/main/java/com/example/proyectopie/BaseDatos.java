@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.proyectopie;
 
 public class BaseDatos {
         private String preguntas[] = {
