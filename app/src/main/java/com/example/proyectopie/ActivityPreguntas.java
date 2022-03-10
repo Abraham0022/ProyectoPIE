@@ -20,7 +20,7 @@ public class ActivityPreguntas extends AppCompatActivity {
     RadioGroup rgGrupo;
     Button btn_iniciar;
     String respuestaCorrecta, strResp;
-    String nombre;
+    String nombre; //nombre insertado por el usuario en la activityyPrincipal
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
