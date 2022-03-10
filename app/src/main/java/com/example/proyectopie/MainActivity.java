@@ -20,14 +20,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*btn_iniciar = (Button) findViewById(R.id.btn_iniciar);
+        btn_iniciar = (Button) findViewById(R.id.btn_iniciar);
         btn_iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent empezarTest=new Intent(MainActivity.this, ActivityPreguntas.class);
-                startActivity(empezarTest);
+            /*    Intent empezarTest=new Intent(MainActivity.this, ActivityPreguntas.class);
+                startActivity(empezarTest);*/
+                empezarTest(v);
             }
-        });*/
+        });
     }
 
     public void empezarTest(View v){
