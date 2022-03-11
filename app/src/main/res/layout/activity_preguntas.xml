@@ -15,7 +15,7 @@
         android:elevation="4dp" />
 
     <TextView
-        android:id="@+id/tv_nombre"
+        android:id="@+id/tv_pregunta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
@@ -23,4 +23,37 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:layout_width="224dp"
+        android:layout_height="91dp"
+        tools:layout_editor_absoluteX="155dp"
+        tools:layout_editor_absoluteY="267dp" >
+
+        <RadioButton
+            android:id="@+id/rbResp1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RadioButton" />
+
+        <RadioButton
+            android:id="@+id/rbResp2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RadioButton" />
+
+        <RadioButton
+            android:id="@+id/rbResp3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RadioButton" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnComprobar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comprobar"
+        tools:layout_editor_absoluteX="203dp"
+        tools:layout_editor_absoluteY="523dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
