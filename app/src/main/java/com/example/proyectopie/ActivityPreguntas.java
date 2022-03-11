@@ -1,9 +1,12 @@
 package com.example.proyectopie;
 
+import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +38,7 @@ public class ActivityPreguntas extends AppCompatActivity {
         nombre = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
         myToolbar.setTitle("Adelante "+ nombre);
+        myToolbar.setTitleTextColor(ContextCompat.getColor(getBaseContext(),R.color.white)); //poner el texto del toolbar de color blanco
         setSupportActionBar(myToolbar);
 
         preguntaTxt = findViewById(R.id.tv_pregunta);

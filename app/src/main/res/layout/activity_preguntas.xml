@@ -12,7 +12,8 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        android:theme="@style/Theme.ProyectoPIE" />
+        android:theme="@style/Theme.ProyectoPIE"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tv_pregunta"

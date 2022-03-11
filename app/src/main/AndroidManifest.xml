@@ -11,15 +11,14 @@
         android:theme="@style/Theme.ProyectoPIE">
         <activity
             android:name=".ActivityPreguntas"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            />
+            android:exported="false" />
+            <!--android:theme="@style/Theme.AppCompat.Light.NoActionBar" -->
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
