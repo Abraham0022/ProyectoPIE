@@ -17,11 +17,14 @@
 
     <TextView
         android:id="@+id/tv_pregunta"
-        android:layout_width="wrap_content"
-        android:layout_height="106dp"
+        android:layout_width="348dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="50dp"
-        android:text="TextView"
-        android:textSize="20sp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/str_pregunta"
+        android:textAlignment="center"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
@@ -40,15 +43,16 @@
             android:id="@+id/rbResp1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="RadioButton"
-            android:onClick="onRadioBtnClik"/>
+            android:onClick="onRadioBtnClik"
+            android:text="@string/str_respuesta"
+            tools:ignore="DuplicateSpeakableTextCheck" />
 
         <RadioButton
             android:id="@+id/rbResp2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="RadioButton"
+            android:text="@string/str_respuesta"
             android:onClick="onRadioBtnClik"/>
 
         <RadioButton
@@ -56,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="RadioButton"
+            android:text="@string/str_respuesta"
             android:onClick="onRadioBtnClik"/>
     </RadioGroup>
 

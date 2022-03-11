@@ -4,4 +4,6 @@
     <string name="str_pistaNombre">Introduce tu nombre</string>
     <string name="str_btInicio">Iniciar test</string>
     <string name="str_btComprobar">Comprobar test</string>
+    <string name="str_respuesta">Respuesta</string>
+    <string name="str_pregunta">Pregunta</string>
 </resources>
