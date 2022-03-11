@@ -1,12 +1,11 @@
 package com.example.proyectopie;
 
-import androidx.annotation.ColorInt;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,10 +14,12 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 public class ActivityPreguntas extends AppCompatActivity {
     private BaseDatos baseDeDatos;
     private int numPregunta=0, aciertos=0;
-    TextView preguntaTxt, txtPrueba;
+    TextView preguntaTxt;
     RadioButton rbResp1, rbResp2, rbResp3;
     RadioGroup rgGrupo;
     Button btn_iniciar;
@@ -27,19 +28,23 @@ public class ActivityPreguntas extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        baseDeDatos=new BaseDatos();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preguntas);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        myToolbar.setTitle("Adelante "+ nombre);
+        myToolbar.setTitleTextColor(ContextCompat.getColor(getBaseContext(),R.color.white)); //poner el texto del toolbar de color blanco
+        setSupportActionBar(myToolbar);
 
+        Locale localizacion = null;
+        String idioma = localizacion.getDefault().getLanguage();
+        baseDeDatos = new BaseDatos(idioma);
 
         Intent intent = getIntent();
         nombre = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
-        myToolbar.setTitle("Adelante "+ nombre);
-        myToolbar.setTitleTextColor(ContextCompat.getColor(getBaseContext(),R.color.white)); //poner el texto del toolbar de color blanco
-        setSupportActionBar(myToolbar);
+
 
         preguntaTxt = findViewById(R.id.tv_pregunta);
         rbResp1 = findViewById(R.id.rbResp1);
@@ -47,12 +52,12 @@ public class ActivityPreguntas extends AppCompatActivity {
         rbResp3 = findViewById(R.id.rbResp3);
         cargarPregunta();
 
-        btn_iniciar = (Button) findViewById(R.id.btnComprobar);
+        btn_iniciar = findViewById(R.id.btnComprobar);
         btn_iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(respuestaCorrecta==strResp){
+                if(respuestaCorrecta.equals(strResp) ){
                     aciertos++;
                 }
                 numPregunta++;
