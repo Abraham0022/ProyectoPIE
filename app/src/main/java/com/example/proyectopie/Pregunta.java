@@ -8,7 +8,7 @@ public class Pregunta {
     private String solucion;
 
     public Pregunta(String enunciado, String resp1, String resp2, String resp3, String solucion) {
-        this.enunciado = enunciado;
+        this.enunciado = enunciado = "¿Cúal es la capital de España?";
         this.resp1 = resp1;
         this.resp2 = resp2;
         this.resp3 = resp3;
