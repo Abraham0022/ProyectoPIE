@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ActivityPreguntas extends AppCompatActivity {
-    private BaseDatos baseDeDatos;
+    private BaseDatosAntigua baseDeDatos;
     private int numPregunta=0, aciertos=0;
     TextView preguntaTxt, txtPrueba;
     RadioButton rbResp1, rbResp2, rbResp3;
@@ -24,7 +24,7 @@ public class ActivityPreguntas extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        baseDeDatos=new BaseDatos();
+        baseDeDatos=new BaseDatosAntigua();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preguntas);
 
