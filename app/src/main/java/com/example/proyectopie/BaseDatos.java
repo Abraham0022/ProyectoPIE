@@ -8,28 +8,28 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 import java.io.File;
 
+
 public class BaseDatos {
-    private Pregunta[];
+    //private Pregunta[];
 
 
-    public static void main(String argv[])
-        {
+    public BaseDatos(){
             try {
                 // creating a constructor of file class and
                 // parsing an XML file
-                File file = new File(
-                        "F:\\geeksforgeeks_contributions\\gfg.xml");
-
+                File file = new File("preguntas.xml");
+                System.out.println("Fichero cargado");
                 // Defines a factory API that enables
                 // applications to obtain a parser that produces
                 // DOM object trees from XML documents.
-                DocumentBuilderFactory dbf
+               DocumentBuilderFactory dbf
                         = DocumentBuilderFactory.newInstance();
 
                 // we are creating an object of builder to parse
                 // the  xml file.
                 DocumentBuilder db = dbf.newDocumentBuilder();
                 Document doc = db.parse(file);
+
 
             /*here normalize method Puts all Text nodes in
             the full depth of the sub-tree underneath this
@@ -45,7 +45,7 @@ public class BaseDatos {
                 // Here nodeList contains all the nodes with
                 // name geek.
                 NodeList nodeList
-                        = doc.getElementsByTagName("geek");
+                        = doc.getElementsByTagName("pregunta");
 
                 // Iterate through all the nodes in NodeList
                 // using for loop.
@@ -57,36 +57,36 @@ public class BaseDatos {
                             == Node.ELEMENT_NODE) {
                         Element tElement = (Element)node;
                         System.out.println(
-                                "User id: "
+                                "enunciado: "
                                         + tElement
-                                        .getElementsByTagName("id")
+                                        .getElementsByTagName("enunciado")
                                         .item(0)
                                         .getTextContent());
                         System.out.println(
-                                "User Name: "
+                                "resp1: "
                                         + tElement
                                         .getElementsByTagName(
-                                                "username")
+                                                "resp1")
                                         .item(0)
                                         .getTextContent());
                         System.out.println(
-                                "Enrolled Course: "
+                                "resp2: "
                                         + tElement
                                         .getElementsByTagName(
-                                                "EnrolledCourse")
+                                                "resp2")
                                         .item(0)
                                         .getTextContent());
                         System.out.println(
-                                "Mode: "
+                                "resp3: "
                                         + tElement
-                                        .getElementsByTagName("mode")
+                                        .getElementsByTagName("resp3")
                                         .item(0)
                                         .getTextContent());
                         System.out.println(
-                                "Duration: "
+                                "solucion: "
                                         + tElement
                                         .getElementsByTagName(
-                                                "duration")
+                                                "solucion")
                                         .item(0)
                                         .getTextContent());
                     }

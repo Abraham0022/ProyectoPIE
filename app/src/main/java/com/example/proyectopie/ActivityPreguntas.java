@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ActivityPreguntas extends AppCompatActivity {
-    private BaseDatosAntigua baseDeDatos;
+    private BaseDatos baseDeDatos;
     private int numPregunta=0, aciertos=0;
     TextView preguntaTxt, txtPrueba;
     RadioButton rbResp1, rbResp2, rbResp3;
@@ -24,7 +24,7 @@ public class ActivityPreguntas extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        baseDeDatos=new BaseDatosAntigua();
+        baseDeDatos=new BaseDatos();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preguntas);
 
@@ -41,7 +41,7 @@ public class ActivityPreguntas extends AppCompatActivity {
         rbResp1 = findViewById(R.id.rbResp1);
         rbResp2 = findViewById(R.id.rbResp2);
         rbResp3 = findViewById(R.id.rbResp3);
-        cargarPregunta();
+        //cargarPregunta();
 
         btn_iniciar = (Button) findViewById(R.id.btnComprobar);
         btn_iniciar.setOnClickListener(new View.OnClickListener() {
@@ -55,14 +55,14 @@ public class ActivityPreguntas extends AppCompatActivity {
                 rbResp1.setChecked(false);
                 rbResp2.setChecked(false);
                 rbResp3.setChecked(false);
-                cargarPregunta();
+                //cargarPregunta();
 
             }
         });
 
         //txtPrueba=findViewById(R.id.txtPrueba);
 
-    }
+    }/*
     protected void cargarPregunta(){
         //Hemos de intentar que esto funcione en random
 
@@ -79,10 +79,10 @@ public class ActivityPreguntas extends AppCompatActivity {
             mostrarPuntuacion.putExtra("nombre",nombreJugador);
             mostrarPuntuacion.putExtra("puntos", puntuacion);
             startActivity(mostrarPuntuacion);
-            finish();*/
+            finish();*
             preguntaTxt.setText("NO hay mas preguntas "+ nombre +" has acertado: " +aciertos);
         }
-    }
+    }*/
 
     public void onRadioBtnClik(View view){
           // Is the button now checked?

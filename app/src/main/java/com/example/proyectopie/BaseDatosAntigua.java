@@ -7,7 +7,7 @@ public class BaseDatosAntigua {
                 "Dispositivo que permite mostrar imagenees en pantalla",
                 "La información dentro del ordenador viaja por ",
                 "En redes una topologia física se corresponde con",
-                "en un cable de par trenzado, que tipo de señales se utilizan"
+                "En un cable de par trenzado, que tipo de señales se utilizan"
         };
         private String respuestasPosibles[][] = {
                 {"RAM","VGA","CPU"},
