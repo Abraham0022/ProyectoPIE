@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<cuestiones xmlns:android="http://schemas.android.com/apk/res/android">
+<cuestiones>
     <pregunta>
         <enunciado>Elemento que permite el almacenamiento de información de forma transitoria</enunciado>
         <resp1>RAM</resp1>

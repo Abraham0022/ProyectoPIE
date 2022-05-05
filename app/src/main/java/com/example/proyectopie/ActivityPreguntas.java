@@ -130,69 +130,92 @@ public class ActivityPreguntas extends AppCompatActivity {
 public void cargarPreguntas() {
 
 
-            XmlResourceParser xrp = getResources().getXml(R.xml.cuestions);
-            ArrayList enunciadoList = new ArrayList();
-            ArrayList respuestasList = new ArrayList();
-            String auxResp[]= new String[3];
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        XmlResourceParser xrp = getResources().getXml(R.xml.cuestions);
 
-            try {
-
-                int eventType = xrp.getEventType();
-
-                while (eventType != XmlPullParser.END_DOCUMENT) {
-                    if (eventType == XmlPullParser.START_DOCUMENT) {
-                        //System.out.println("Start document");
-                    } else if (eventType == XmlPullParser.START_TAG) {
-                      //  System.out.println("Start tag " + xrp.getName());
-                        if("enunciado".equalsIgnoreCase(xrp.getName())){
-                          //  System.err.println("ENUNCIADO");
-                           while(eventType!= XmlPullParser.TEXT)
-                               eventType = xrp.next();
-                            enunciadoList.add(xrp.getText());
-                            System.out.println("*");
-                        }else if("resp1".equalsIgnoreCase(xrp.getName())){
-                            while(eventType!= XmlPullParser.TEXT)
-                                eventType = xrp.next();
-                            auxResp[0]=xrp.getText();
-                        }else if("resp2".equalsIgnoreCase(xrp.getName())){
-                            while(eventType!= XmlPullParser.TEXT)
-                                eventType = xrp.next();
-                            auxResp[1]=xrp.getText();
-
-                        }else if("resp3".equalsIgnoreCase(xrp.getName())){
-                            while(eventType!= XmlPullParser.TEXT)
-                                eventType = xrp.next();
-                            auxResp[2]=xrp.getText();
-                            respuestasList.add(auxResp);
+    try {
+        int eventType = xrp.getEventType();
+        while (eventType != XmlResourceParser.END_DOCUMENT)
+        {
+            System.out.println("entramos en el while");
+            if (eventType == XmlResourceParser.START_TAG) {
+                if (xrp.getName().equalsIgnoreCase("pregunta"))
+                {
+                    Pregunta pre = new Pregunta();
+                    xrp.next(); //nos movemos al siguiente nodo
+                    if (xrp.getName() != null && xrp.getName().equalsIgnoreCase("enunciado")) {
+                        eventType = xrp.next();
+                        if(eventType == XmlResourceParser.TEXT) {
+                            System.out.println("dentro de .text.............. "+xrp.getText());
+                            pre.setEnunciado(xrp.getText());
+                            eventType = xrp.next();
+                            eventType = xrp.next();
                         }
-
-                    } else if (eventType == XmlPullParser.END_TAG) {
-                        //System.out.println("End tag " + xrp.getName());
-                    } else if (eventType == XmlPullParser.TEXT) {
-                      //  System.out.println("Text " + xrp.getText());
                     }
-                   // respuestasList.add(auxResp);
-                    eventType = xrp.next();
+                    if (xrp.getName() != null && xrp.getName().equalsIgnoreCase("resp1")) {
+                        eventType = xrp.next();
+                        if(eventType == XmlResourceParser.TEXT) {
+                            System.out.println("dentro de .text.............. "+xrp.getText());
+                            pre.setResp1(xrp.getText());
+                            eventType = xrp.next();
+                            eventType = xrp.next();
+                        }
+                    }
+                    if (xrp.getName() != null && xrp.getName().equalsIgnoreCase("resp2")) {
+                        eventType = xrp.next();
+                        if(eventType == XmlResourceParser.TEXT) {
+                            System.out.println("dentro de .text.............. "+xrp.getText());
+                            pre.setResp2(xrp.getText());
+                            eventType = xrp.next();
+                            eventType = xrp.next();
+                        }
+                    }
+                    if (xrp.getName() != null && xrp.getName().equalsIgnoreCase("resp3")) {
+                        eventType = xrp.next();
+                        if(eventType == XmlResourceParser.TEXT) {
+                            System.out.println("dentro de .text.............. "+xrp.getText());
+                            pre.setResp3(xrp.getText());
+                            eventType = xrp.next();
+                            eventType = xrp.next();
+                        }
+                    }
+                    if (xrp.getName() != null && xrp.getName().equalsIgnoreCase("solucion")) {
+                        eventType = xrp.next();
+                        if(eventType == XmlResourceParser.TEXT) {
+                            System.out.println("dentro de .text.............. "+xrp.getText());
+                            pre.setSolucion(xrp.getText());
+                            eventType = xrp.next();
+                        }
+                    }
+                    preguntas.add(pre);
                 }
-/************************************************************************************/
-                System.out.println("/*********************************************/");
-
-
-                for(int i=0;i<enunciadoList.size();i++){
-                    System.out.println(enunciadoList.get(i));
-                    auxResp= (String[]) respuestasList.get(i);
-                    for(int j=0;i<auxResp.length;j++){
-                      System.out.println(auxResp[j]);
-                   }
-                }
-                System.out.println("/*********************************************/");
-
-            } catch (XmlPullParserException e) {
-                System.out.println("Error: " + e.getMessage());
-            } catch (IOException e) {
-                System.out.println("Error: " + e.getMessage());
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+            eventType = xrp.next();
         }
- }
+        } catch (XmlPullParserException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    /************************************************************************************/
+        System.out.println("/*********************************************/");
+        System.out.println("hay " + preguntas.size() + " preguntas");
+
+        for (Pregunta pr : preguntas) {
+            System.out.println(pr.toString());
+        }
+                    /*for(int i=0;i<enunciadoList.size();i++){
+                        System.out.println(enunciadoList.get(i));
+                        auxResp= (String[]) respuestasList.get(i);
+                        for(int j=0;j<auxResp.length;j++){
+                          System.out.println(auxResp[j]);
+                       }
+                    }*/
+        System.out.println("/*********************************************/");
+    }
+
+}
