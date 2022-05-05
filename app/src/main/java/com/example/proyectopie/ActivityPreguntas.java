@@ -25,6 +25,7 @@ public class ActivityPreguntas extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         baseDeDatos=new BaseDatos();
+        baseDeDatos.cargarDatos();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preguntas);
 
