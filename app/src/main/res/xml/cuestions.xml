@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <cuestiones xmlns:android="http://schemas.android.com/apk/res/android">
     <pregunta>
-        <enunciado>"Elemento que permite el almacenamiento de información de forma transitoria"</enunciado>
-        <resp1>"RAM"</resp1>
-        <resp2>"VGA"</resp2>
-        <resp3>"CPU"</resp3>
-        <solucion>"RAM"</solucion>
+        <enunciado>Elemento que permite el almacenamiento de información de forma transitoria</enunciado>
+        <resp1>RAM</resp1>
+        <resp2>VGA</resp2>
+        <resp3>CPU</resp3>
+        <solucion>RAM</solucion>
     </pregunta>
 
     <pregunta>
-        <enunciado>"Elemento principal del ordenador que realiza los cálculos"</enunciado>
-        <resp1>"RAM"</resp1>
-        <resp2>"VGA"</resp2>
-        <resp3>"CPU"</resp3>
-        <solucion>"CPU"</solucion>
+        <enunciado>Elemento principal del ordenador que realiza los cálculos</enunciado>
+        <resp1>RAM</resp1>
+        <resp2>VGA</resp2>
+        <resp3>CPU</resp3>
+        <solucion>CPU</solucion>
     </pregunta>
 
     <pregunta>
-        <enunciado>"Dispositivo que permite mostrar imagenees en pantalla"</enunciado>
-        <resp1>"RAM"</resp1>
-        <resp2>"VGA"</resp2>
-        <resp3>"CPU"</resp3>
-        <solucion>"VGA"</solucion>
+        <enunciado>Dispositivo que permite mostrar imagenees en pantalla</enunciado>
+        <resp1>RAM</resp1>
+        <resp2>VGA</resp2>
+        <resp3>CPU</resp3>
+        <solucion>VGA</solucion>
     </pregunta>
 
     <pregunta>

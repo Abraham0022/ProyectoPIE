@@ -4,13 +4,21 @@ package com.example.proyectopie;
 import android.content.Context;
 import android.content.res.Resources;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
@@ -23,109 +31,88 @@ public class BaseDatos {
     }
         public void cargarDatos(){
             try {
-            /*SAXParserFactory is  a factory API that
-            enables applications to configure and obtain a
-            SAX based parser to parse XML documents. */
-                SAXParserFactory factory
-                        = SAXParserFactory.newInstance();
+                // creating a constructor of file class and
+                // parsing an XML file
+                File file = new File("C:\\ProyectoPIE\\app\\src\\main\\res\\xml\\cuestions.xml");
 
-                // Creating a new instance of a SAXParser using
-                // the currently configured factory parameters.
-                SAXParser saxParser = factory.newSAXParser();
+                // Defines a factory API that enables
+                // applications to obtain a parser that produces
+                // DOM object trees from XML documents.
+                DocumentBuilderFactory dbf
+                        = DocumentBuilderFactory.newInstance();
 
-                // DefaultHandler is Default base class for SAX2
-                // event handlers.
-                DefaultHandler handler = new DefaultHandler() {
-                    boolean id = false;
-                    boolean username = false;
-                    boolean EnrolledCourse = false;
-                    boolean mode = false;
-                    boolean duration = false;
+                // we are creating an object of builder to parse
+                // the  xml file.
+                DocumentBuilder db = dbf.newDocumentBuilder();
 
-                    // Receive notification of the start of an
-                    // element. parser starts parsing a element
-                    // inside the document
-                    public void startElement(
-                            String uri, String localName,
-                            String qName, Attributes attributes)
-                            throws SAXException
-                    {
+                Document doc = db.parse(file);
 
-                        if (qName.equalsIgnoreCase("Id")) {
-                            id = true;
-                        }
-                        if (qName.equalsIgnoreCase(
-                                "username")) {
-                            username = true;
-                        }
-                        if (qName.equalsIgnoreCase(
-                                "EnrolledCourse")) {
-                            EnrolledCourse = true;
-                        }
-                        if (qName.equalsIgnoreCase("mode")) {
-                            mode = true;
-                        }
-                        if (qName.equalsIgnoreCase(
-                                "duration")) {
-                            duration = true;
-                        }
+            /*here normalize method Puts all Text nodes in
+            the full depth of the sub-tree underneath this
+            Node, including attribute nodes, into a "normal"
+            form where only structure separates
+            Text nodes, i.e., there are neither adjacent
+            Text nodes nor empty Text nodes. */
+                doc.getDocumentElement().normalize();
+                System.out.println(
+                        "Root element: "
+                                + doc.getDocumentElement().getNodeName());
+
+                // Here nodeList contains all the nodes with
+                // name geek.
+                NodeList nodeList
+                        = doc.getElementsByTagName("pregunta");
+
+                // Iterate through all the nodes in NodeList
+                // using for loop.
+                for (int i = 0; i < nodeList.getLength(); ++i) {
+                    Node node = nodeList.item(i);
+                    System.out.println("\nNode Name :"
+                            + node.getNodeName());
+                    if (node.getNodeType()
+                            == Node.ELEMENT_NODE) {
+                        Element tElement = (Element)node;
+                        System.out.println(
+                                "User id: "
+                                        + tElement
+                                        .getElementsByTagName("enunciado")
+                                        .item(0)
+                                        .getTextContent());
+                        System.out.println(
+                                "User Name: "
+                                        + tElement
+                                        .getElementsByTagName(
+                                                "resp1")
+                                        .item(0)
+                                        .getTextContent());
+                        System.out.println(
+                                "Enrolled Course: "
+                                        + tElement
+                                        .getElementsByTagName(
+                                                "resp2")
+                                        .item(0)
+                                        .getTextContent());
+                        System.out.println(
+                                "Mode: "
+                                        + tElement
+                                        .getElementsByTagName("resp3")
+                                        .item(0)
+                                        .getTextContent());
+                        System.out.println(
+                                "solucion: "
+                                        + tElement
+                                        .getElementsByTagName(
+                                                "solucion")
+                                        .item(0)
+                                        .getTextContent());
                     }
-
-                    // Receive notification of character data
-                    // inside an element, reads the text value of
-                    // the currently parsed element
-                    public void characters(char ch[], int start,
-                                           int length)
-                            throws SAXException
-                    {
-                        if (id) {
-                            System.out.println(
-                                    "ID : "
-                                            + new String(ch, start,
-                                            length));
-                            id = false;
-                        }
-                        if (username) {
-                            System.out.println(
-                                    "User Name: "
-                                            + new String(ch, start,
-                                            length));
-                            username = false;
-                        }
-                        if (EnrolledCourse) {
-                            System.out.println(
-                                    "Enrolled Course: "
-                                            + new String(ch, start,
-                                            length));
-                            EnrolledCourse = false;
-                        }
-                        if (mode) {
-                            System.out.println(
-                                    "mode: "
-                                            + new String(ch, start,
-                                            length));
-                            mode = false;
-                        }
-                        if (duration) {
-                            System.out.println(
-                                    "duration : "
-                                            + new String(ch, start,
-                                            length));
-                            duration = false;
-                        }
-                    }
-                };
-
-            /*Parse the content described by the giving
-             Uniform Resource
-             Identifier (URI) as XML using the specified
-             DefaultHandler. */
-
-               saxParser.parse("C:\\ProyectoPIE\\cuestions.xml",handler);
-
-               /* InputSource fs = (InputSource) Resources.getSystem().getXml(R.xml.preguntas);
-                saxParser.parse(fs,handler);*/
+                }
             }
+
+            // This exception block catches all the exception
+            // raised.
+            // For example if we try to access a element by a
+            // TagName that is not there in the XML etc.
             catch (Exception e) {
                 System.out.println(e);
             }
