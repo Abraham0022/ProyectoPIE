@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void empezarTest(View v){
-        Intent intent = new Intent(this, ActivityPreguntas1.class);
+        Intent intent = new Intent(this, ActivityPreguntas.class);
         EditText editText = (EditText) findViewById(R.id.et_nombre);
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);

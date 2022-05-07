@@ -13,10 +13,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.proyectopie.BaseDatos;
-import com.example.proyectopie.MainActivity;
-import com.example.proyectopie.Pregunta;
-
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -28,14 +24,16 @@ public class ActivityPreguntas extends AppCompatActivity {
     TextView preguntaTxt, txtPrueba;
     RadioButton rbResp1, rbResp2, rbResp3;
     RadioGroup rgGrupo;
-    Button btn_iniciar;
+    Button btn_comprobar;
     String respuestaCorrecta, strResp;
     String nombre; //nombre insertado por el usuario en la activityyPrincipal
+    ArrayList<Pregunta> preguntas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //baseDeDatos=new BaseDatos();
         //baseDeDatos.cargarDatos();
+        preguntas = new ArrayList<>();
         cargarPreguntas();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preguntas);
@@ -53,10 +51,10 @@ public class ActivityPreguntas extends AppCompatActivity {
         rbResp1 = findViewById(R.id.rbResp1);
         rbResp2 = findViewById(R.id.rbResp2);
         rbResp3 = findViewById(R.id.rbResp3);
-        //cargarPregunta();
+        mostrarPregunta();
 
-        btn_iniciar = (Button) findViewById(R.id.btnComprobar);
-        btn_iniciar.setOnClickListener(new View.OnClickListener() {
+        btn_comprobar = (Button) findViewById(R.id.btnComprobar);
+        btn_comprobar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -67,64 +65,41 @@ public class ActivityPreguntas extends AppCompatActivity {
                 rbResp1.setChecked(false);
                 rbResp2.setChecked(false);
                 rbResp3.setChecked(false);
-                //cargarPregunta();
+                mostrarPregunta();
 
             }
         });
 
         //txtPrueba=findViewById(R.id.txtPrueba);
 
-    }/*
-    protected void cargarPregunta(){
+    }
+
+    protected void mostrarPregunta(){
         //Hemos de intentar que esto funcione en random
 
-        if (baseDeDatos.cantidadPreguntas()>numPregunta){
-            preguntaTxt.setText(baseDeDatos.obtenerPregunta(numPregunta));
+        if (preguntas.size()>numPregunta){
+            preguntaTxt.setText(preguntas.get(numPregunta).getEnunciado());
 
-            rbResp1.setText(baseDeDatos.obtenerRespuesta1(numPregunta));
-            rbResp2.setText(baseDeDatos.obtenerRespuesta2(numPregunta));
-            rbResp3.setText(baseDeDatos.obtenerRespuesta3(numPregunta));
-            respuestaCorrecta = baseDeDatos.obtenerRespuestaCorrecta(numPregunta);
+            rbResp1.setText(preguntas.get(numPregunta).getResp1());
+            rbResp2.setText(preguntas.get(numPregunta).getResp2());
+            rbResp3.setText(preguntas.get(numPregunta).getResp3());
+            respuestaCorrecta = preguntas.get(numPregunta).getSolucion();
 
-        }else{
-         /*   Intent mostrarPuntuacion = new Intent (TestActivity.this, PuntuacionActivity.class);
+        }else{/*
+            Intent mostrarPuntuacion = new Intent (TestActivity.this, PuntuacionActivity.class);
             mostrarPuntuacion.putExtra("nombre",nombreJugador);
             mostrarPuntuacion.putExtra("puntos", puntuacion);
             startActivity(mostrarPuntuacion);
-            finish();*
+            finish();*/
             preguntaTxt.setText("NO hay mas preguntas "+ nombre +" has acertado: " +aciertos);
-        }
-    }*/
-
-    public void onRadioBtnClik(View view){
-        // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
-        Toast toast = null;
-        // Check which radio button was clicked
-        switch(view.getId()) {
-            case R.id.rbResp1:
-                if (checked)
-                    // Pirates are the best
-                    strResp= (String)rbResp1.getText();
-                //txtPrueba.setText(aciertos);
-                break;
-            case R.id.rbResp2:
-                if (checked)
-                    strResp= (String)rbResp2.getText();
-                // txtPrueba.setText(aciertos);
-                break;
-            case R.id.rbResp3:
-                if (checked)
-                    strResp= (String)rbResp3.getText();
-                //    txtPrueba.setText(aciertos);
-                break;
         }
     }
 
     public void cargarPreguntas() {
 
 
-        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        //ArrayList<Pregunta> preguntas = new ArrayList<>();
+
         XmlResourceParser xrp = getResources().getXml(R.xml.cuestions);
 
         try {
@@ -211,5 +186,34 @@ public class ActivityPreguntas extends AppCompatActivity {
                     }*/
         System.out.println("/*********************************************/");
     }
+
+
+    /*Lo utilizamos para guardar la respuesta marcada y asi despues poder comprobar si es la correcta*/
+    public void onRadioBtnClik(View view){
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+        Toast toast = null;
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.rbResp1:
+                if (checked)
+                    // Pirates are the best
+                    strResp= (String)rbResp1.getText();
+                //txtPrueba.setText(aciertos);
+                break;
+            case R.id.rbResp2:
+                if (checked)
+                    strResp= (String)rbResp2.getText();
+                // txtPrueba.setText(aciertos);
+                break;
+            case R.id.rbResp3:
+                if (checked)
+                    strResp= (String)rbResp3.getText();
+                //    txtPrueba.setText(aciertos);
+                break;
+        }
+    }
+
+
 
 }
