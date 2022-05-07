@@ -7,7 +7,8 @@ public class Pregunta {
     private String resp3;
     private String solucion;
 
-    public Pregunta(String enunciado, String resp1, String resp2, String resp3, String solucion) {
+
+        public Pregunta(String enunciado, String resp1, String resp2, String resp3, String solucion) {
         this.enunciado = enunciado;
         this.resp1 = resp1;
         this.resp2 = resp2;
