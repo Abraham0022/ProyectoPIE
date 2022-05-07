@@ -19,9 +19,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ActivityPreguntas extends AppCompatActivity {
-    private BaseDatos baseDeDatos;
+    //private BaseDatos baseDeDatos;
     private int numPregunta=0, aciertos=0;
-    TextView preguntaTxt, txtPrueba;
+    TextView preguntaTxt;
     RadioButton rbResp1, rbResp2, rbResp3;
     RadioGroup rgGrupo;
     Button btn_comprobar;
@@ -51,6 +51,7 @@ public class ActivityPreguntas extends AppCompatActivity {
         rbResp1 = findViewById(R.id.rbResp1);
         rbResp2 = findViewById(R.id.rbResp2);
         rbResp3 = findViewById(R.id.rbResp3);
+        rgGrupo = findViewById(R.id.radioGroup);
         mostrarPregunta();
 
         btn_comprobar = (Button) findViewById(R.id.btnComprobar);
@@ -58,13 +59,11 @@ public class ActivityPreguntas extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(respuestaCorrecta==strResp){
+                if(respuestaCorrecta.equalsIgnoreCase(strResp)){
                     aciertos++;
                 }
                 numPregunta++;
-                rbResp1.setChecked(false);
-                rbResp2.setChecked(false);
-                rbResp3.setChecked(false);
+                rgGrupo.clearCheck();
                 mostrarPregunta();
 
             }
@@ -85,13 +84,13 @@ public class ActivityPreguntas extends AppCompatActivity {
             rbResp3.setText(preguntas.get(numPregunta).getResp3());
             respuestaCorrecta = preguntas.get(numPregunta).getSolucion();
 
-        }else{/*
-            Intent mostrarPuntuacion = new Intent (TestActivity.this, PuntuacionActivity.class);
-            mostrarPuntuacion.putExtra("nombre",nombreJugador);
-            mostrarPuntuacion.putExtra("puntos", puntuacion);
+        }else{
+            Intent mostrarPuntuacion = new Intent (ActivityPreguntas.this, PuntuacionActivity.class);
+            mostrarPuntuacion.putExtra("nombre",nombre);
+            mostrarPuntuacion.putExtra("puntos", aciertos);
             startActivity(mostrarPuntuacion);
-            finish();*/
-            preguntaTxt.setText("NO hay mas preguntas "+ nombre +" has acertado: " +aciertos);
+            finish();
+           // preguntaTxt.setText("NO hay mas preguntas "+ nombre +" has acertado: " +aciertos);
         }
     }
 
@@ -106,8 +105,7 @@ public class ActivityPreguntas extends AppCompatActivity {
             int eventType = xrp.getEventType();
             while (eventType != XmlResourceParser.END_DOCUMENT)
             {
-                System.out.println("entramos en el while");
-                if (eventType == XmlResourceParser.START_TAG) {
+                 if (eventType == XmlResourceParser.START_TAG) {
                     if (xrp.getName().equalsIgnoreCase("pregunta"))
                     {
                         Pregunta pre = new Pregunta();
@@ -115,7 +113,7 @@ public class ActivityPreguntas extends AppCompatActivity {
                         if (xrp.getName() != null && xrp.getName().equalsIgnoreCase("enunciado")) {
                             eventType = xrp.next();
                             if(eventType == XmlResourceParser.TEXT) {
-                                System.out.println("dentro de .text.............. "+xrp.getText());
+
                                 pre.setEnunciado(xrp.getText());
                                 eventType = xrp.next();
                                 eventType = xrp.next();
@@ -124,7 +122,7 @@ public class ActivityPreguntas extends AppCompatActivity {
                         if (xrp.getName() != null && xrp.getName().equalsIgnoreCase("resp1")) {
                             eventType = xrp.next();
                             if(eventType == XmlResourceParser.TEXT) {
-                                System.out.println("dentro de .text.............. "+xrp.getText());
+
                                 pre.setResp1(xrp.getText());
                                 eventType = xrp.next();
                                 eventType = xrp.next();
@@ -133,7 +131,7 @@ public class ActivityPreguntas extends AppCompatActivity {
                         if (xrp.getName() != null && xrp.getName().equalsIgnoreCase("resp2")) {
                             eventType = xrp.next();
                             if(eventType == XmlResourceParser.TEXT) {
-                                System.out.println("dentro de .text.............. "+xrp.getText());
+
                                 pre.setResp2(xrp.getText());
                                 eventType = xrp.next();
                                 eventType = xrp.next();
@@ -142,7 +140,7 @@ public class ActivityPreguntas extends AppCompatActivity {
                         if (xrp.getName() != null && xrp.getName().equalsIgnoreCase("resp3")) {
                             eventType = xrp.next();
                             if(eventType == XmlResourceParser.TEXT) {
-                                System.out.println("dentro de .text.............. "+xrp.getText());
+
                                 pre.setResp3(xrp.getText());
                                 eventType = xrp.next();
                                 eventType = xrp.next();
@@ -151,7 +149,7 @@ public class ActivityPreguntas extends AppCompatActivity {
                         if (xrp.getName() != null && xrp.getName().equalsIgnoreCase("solucion")) {
                             eventType = xrp.next();
                             if(eventType == XmlResourceParser.TEXT) {
-                                System.out.println("dentro de .text.............. "+xrp.getText());
+
                                 pre.setSolucion(xrp.getText());
                                 eventType = xrp.next();
                             }
@@ -168,23 +166,6 @@ public class ActivityPreguntas extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-        /************************************************************************************/
-        System.out.println("/*********************************************/");
-        System.out.println("hay " + preguntas.size() + " preguntas");
-
-        for (Pregunta pr : preguntas) {
-            System.out.println(pr.toString());
-        }
-                    /*for(int i=0;i<enunciadoList.size();i++){
-                        System.out.println(enunciadoList.get(i));
-                        auxResp= (String[]) respuestasList.get(i);
-                        for(int j=0;j<auxResp.length;j++){
-                          System.out.println(auxResp[j]);
-                       }
-                    }*/
-        System.out.println("/*********************************************/");
     }
 
 
