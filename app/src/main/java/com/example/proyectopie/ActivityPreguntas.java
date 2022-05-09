@@ -43,7 +43,6 @@ public class ActivityPreguntas extends AppCompatActivity {
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
 
-
         Intent intent = getIntent();
         nombre = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
