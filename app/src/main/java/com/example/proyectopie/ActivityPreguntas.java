@@ -1,5 +1,7 @@
 package com.example.proyectopie;
 
+import static com.example.proyectopie.R.color.white;
+
 import android.content.Intent;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -45,6 +48,7 @@ public class ActivityPreguntas extends AppCompatActivity {
         nombre = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
         myToolbar.setTitle("Adelante "+ nombre);
+        myToolbar.setTitleTextColor(ContextCompat.getColor(getApplicationContext(), white));
         setSupportActionBar(myToolbar);
 
         preguntaTxt = findViewById(R.id.tv_pregunta);
@@ -76,6 +80,11 @@ public class ActivityPreguntas extends AppCompatActivity {
     protected void mostrarPregunta(){
         //Hemos de intentar que esto funcione en random
 
+        if((preguntas.size()-1) == numPregunta)
+        {
+            btn_comprobar.setText(R.string.str_btfinal);
+        }
+
         if (preguntas.size()>numPregunta){
             preguntaTxt.setText(preguntas.get(numPregunta).getEnunciado());
 
@@ -88,10 +97,12 @@ public class ActivityPreguntas extends AppCompatActivity {
             Intent mostrarPuntuacion = new Intent (ActivityPreguntas.this, PuntuacionActivity.class);
             mostrarPuntuacion.putExtra("nombre",nombre);
             mostrarPuntuacion.putExtra("puntos", aciertos);
+            mostrarPuntuacion.putExtra("total",preguntas.size());
             startActivity(mostrarPuntuacion);
             finish();
            // preguntaTxt.setText("NO hay mas preguntas "+ nombre +" has acertado: " +aciertos);
         }
+
     }
 
     public void cargarPreguntas() {
@@ -100,7 +111,7 @@ public class ActivityPreguntas extends AppCompatActivity {
         //ArrayList<Pregunta> preguntas = new ArrayList<>();
 
         XmlResourceParser xrp = getResources().getXml(R.xml.cuestions);
-
+       // XmlResourceParser xrpRemoteo =
         try {
             int eventType = xrp.getEventType();
             while (eventType != XmlResourceParser.END_DOCUMENT)
