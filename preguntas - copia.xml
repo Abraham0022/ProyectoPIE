@@ -1,7 +1,7 @@
 <? xml version="1.0" encoding="UTF-8" ?>
 <cuestiones>
 	<pregunta>
-		<enunciado>"LEYENDO DESDE C:"</enunciado>
+		<enunciado>"Elemento que permite el almacenamiento de información de forma transitoria"</enunciado>
 		<resp1>"RAM"</resp1>
 		<resp2>"VGA"</resp2>
 		<resp3>"CPU"</resp3>

@@ -2,6 +2,7 @@ package com.example.proyectopie;
 
 import android.content.Intent;
 import android.content.res.XmlResourceParser;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,13 +11,19 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityPreguntas extends AppCompatActivity {
     //private BaseDatos baseDeDatos;
@@ -28,13 +35,24 @@ public class ActivityPreguntas extends AppCompatActivity {
     String respuestaCorrecta, strResp;
     String nombre; //nombre insertado por el usuario en la activityyPrincipal
     ArrayList<Pregunta> preguntas;
+    Pregunta preguntaAux;
+    private final static String URL =
+            "https://educajcyl-my.sharepoint.com/:u:/g/personal/abraham_perbar_educa_jcyl_es/Ee53ixzYz_VFnuJYxNJph_MB6mu1pwTvePserVln3p2vzA?e=qiL6xB";
+          //  "C:\\ProyectoPIE\\preguntas.xml";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //baseDeDatos=new BaseDatos();
         //baseDeDatos.cargarDatos();
         preguntas = new ArrayList<>();
-        cargarPreguntas();
+
+     /*   try {
+            cargarPreguntas();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }*/
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preguntas);
 
@@ -42,8 +60,11 @@ public class ActivityPreguntas extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        nombre = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        Bundle bundle= getIntent().getExtras();
 
+        //nombre= bundle.getString("nombre");
+        nombre = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        preguntas = (ArrayList<Pregunta>) bundle.get("preguntas");
         myToolbar.setTitle("Adelante "+ nombre);
         setSupportActionBar(myToolbar);
 
@@ -69,9 +90,10 @@ public class ActivityPreguntas extends AppCompatActivity {
             }
         });
 
-        //txtPrueba=findViewById(R.id.txtPrueba);
+
 
     }
+
 
     protected void mostrarPregunta(){
         //Hemos de intentar que esto funcione en random
@@ -94,13 +116,19 @@ public class ActivityPreguntas extends AppCompatActivity {
         }
     }
 
-    public void cargarPreguntas() {
+    public void cargarPreguntas() throws XmlPullParserException, IOException {
 
 
-        //ArrayList<Pregunta> preguntas = new ArrayList<>();
-
-        XmlResourceParser xrp = getResources().getXml(R.xml.cuestions);
-
+      //  XmlResourceParser xrp = getResources().getXml(R.xml.cuestions);
+        //InputStream inps =descargarXML(URL);
+/****************************************************************************/
+        InputStream inps= getResources().openRawResource(R.raw.cuestions);
+        preguntas=(ArrayList<Pregunta>) ParserXML.parsear(inps);
+        for(Pregunta auxPregunta: preguntas){
+            System.out.println("**> "+auxPregunta.toString());
+        }
+/*****************************************************************************/
+        /*
         try {
             int eventType = xrp.getEventType();
             while (eventType != XmlResourceParser.END_DOCUMENT)
@@ -165,7 +193,31 @@ public class ActivityPreguntas extends AppCompatActivity {
             System.out.println("Error: " + e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
+        }*/
+    }
+
+    @Nullable
+    private InputStream descargarXML(String direccion) throws IOException {
+        InputStream inps=null;
+        URL url = new URL(direccion);
+        URLConnection connection= url.openConnection();
+        HttpURLConnection httpCon=(HttpURLConnection) connection;
+        httpCon.setDoInput(true);
+        httpCon.setRequestProperty("charset", "utf-8");
+        int responseCode = httpCon.getResponseCode();
+        if(responseCode !=  HttpURLConnection.HTTP_OK){
+             inps= httpCon.getInputStream();
         }
+        return inps;
+
+
+        /***********************************************************************
+        DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        Uri uri = Uri.parse("https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf");
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
+        long reference = manager.enqueue(request);
+        /***********************************************************************/
     }
 
 
@@ -178,19 +230,15 @@ public class ActivityPreguntas extends AppCompatActivity {
         switch(view.getId()) {
             case R.id.rbResp1:
                 if (checked)
-                    // Pirates are the best
-                    strResp= (String)rbResp1.getText();
-                //txtPrueba.setText(aciertos);
+                  strResp= (String)rbResp1.getText();
                 break;
             case R.id.rbResp2:
                 if (checked)
                     strResp= (String)rbResp2.getText();
-                // txtPrueba.setText(aciertos);
                 break;
             case R.id.rbResp3:
                 if (checked)
                     strResp= (String)rbResp3.getText();
-                //    txtPrueba.setText(aciertos);
                 break;
         }
     }
