@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         //ejecutamos el hilo
         new TareaDescargaXml().execute(URL);
 
-        System.out.println("***************************************el arrya de preguntas tiene.................. "+preguntas.size());
+        System.out.println("***************************************el arrya de preguntas tiene.................. "+Pregunta.PREGUNTAS.size());
 
         if(preguntas.size() == 0)
         {
@@ -81,7 +82,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Pregunta> result) {
             // Actualizar contenido del proveedor de datos
-            preguntas = (ArrayList<Pregunta>) result;
+            //preguntas = (ArrayList<Pregunta>) result;
+            System.out.println("*****************************onPostExecute result vale:"+result);
+            Pregunta.PREGUNTAS = result;
+            System.out.println("*****************************onPostExecute preguntas tiene:"+Pregunta.PREGUNTAS);
             // Actualizar la vista del adaptador
            // adaptador.notifyDataSetChanged();
         }
