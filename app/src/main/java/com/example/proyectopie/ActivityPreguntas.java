@@ -1,5 +1,7 @@
 package com.example.proyectopie;
 
+import static com.example.proyectopie.R.color.white;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -33,11 +35,11 @@ public class ActivityPreguntas extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
 
-
         Intent intent = getIntent();
         nombre = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         preguntas = (ArrayList<Pregunta>) intent.getSerializableExtra("listaPreguntas");
         myToolbar.setTitle("Adelante "+ nombre);
+        myToolbar.setTitleTextColor(ContextCompat.getColor(getApplicationContext(), white));
         setSupportActionBar(myToolbar);
 
         preguntaTxt = findViewById(R.id.tv_pregunta);
@@ -66,6 +68,11 @@ public class ActivityPreguntas extends AppCompatActivity {
     protected void mostrarPregunta(){
         //Hemos de intentar que esto funcione en random
 
+        if((preguntas.size()-1) == numPregunta)
+        {
+            btn_comprobar.setText(R.string.str_btfinal);
+        }
+
         if (preguntas.size()>numPregunta){
             preguntaTxt.setText(preguntas.get(numPregunta).getEnunciado());
 
@@ -78,11 +85,14 @@ public class ActivityPreguntas extends AppCompatActivity {
             Intent mostrarPuntuacion = new Intent (ActivityPreguntas.this, PuntuacionActivity.class);
             mostrarPuntuacion.putExtra("nombre",nombre);
             mostrarPuntuacion.putExtra("puntos", aciertos);
+            mostrarPuntuacion.putExtra("total",preguntas.size());
             startActivity(mostrarPuntuacion);
             finish();
            // preguntaTxt.setText("NO hay mas preguntas "+ nombre +" has acertado: " +aciertos);
         }
+
     }
+
 
     /*Lo utilizamos para guardar la respuesta marcada y asi despues poder comprobar si es la correcta*/
     public void onRadioBtnClik(View view){
