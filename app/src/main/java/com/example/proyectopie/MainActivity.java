@@ -17,7 +17,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btn_iniciar = (Button) findViewById(R.id.btn_iniciar);
+        btn_iniciar = findViewById(R.id.btn_iniciar);
         //ejecutamos el hilo
 
         new TareaDescargaXml().execute(URL);
@@ -45,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
         btn_iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            /*    Intent empezarTest=new Intent(MainActivity.this, ActivityPreguntas.class);
-                startActivity(empezarTest);*/
                 empezarTest(v);
             }
         });
@@ -54,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void empezarTest(View v){
 
-        EditText editText = (EditText) findViewById(R.id.et_nombre);
+        EditText editText = findViewById(R.id.et_nombre);
         String message = editText.getText().toString();
         Intent intent = new Intent(MainActivity.this, ActivityPreguntas.class);
         intent.putExtra(EXTRA_MESSAGE, message);
@@ -83,10 +80,9 @@ public class MainActivity extends AppCompatActivity {
             // Actualizar contenido del proveedor de datos
             preguntas = (ArrayList<Pregunta>) result;
             System.out.println("*****************************onPostExecute result vale:"+result);
-            //Pregunta.PREGUNTAS = result;
+
             System.out.println("*****************************onPostExecute preguntas tiene:"+preguntas);
-            // Actualizar la vista del adaptador
-           // adaptador.notifyDataSetChanged();
+
             if ( preguntas.size() > 0 )
             {
                 btn_iniciar.setEnabled(true);
