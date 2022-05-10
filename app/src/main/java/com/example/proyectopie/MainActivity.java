@@ -39,13 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
         System.out.println("***************************************el arrya de preguntas tiene.................. "+Pregunta.PREGUNTAS.size());
 
-        if (preguntas.isEmpty())
-        {
+        if (preguntas.isEmpty()) {
             btn_iniciar.setEnabled(false);
         }
-
-
-
         btn_iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

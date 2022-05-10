@@ -1,9 +1,10 @@
 package com.example.proyectopie;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pregunta {
+public class Pregunta implements Serializable {
     private String enunciado;
     private String resp1;
     private String resp2;
