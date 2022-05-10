@@ -21,10 +21,10 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     Button btn_iniciar;
-    ArrayList<Pregunta> preguntas=null;
+    ArrayList<Pregunta> preguntas= new ArrayList<>() ;
     public static final String EXTRA_MESSAGE = "com.example.proyectopie.MESSAGE";
     private final static String URL =
-            "https://educajcyl-my.sharepoint.com/:u:/g/personal/abraham_perbar_educa_jcyl_es/Ee53ixzYz_VFnuJYxNJph_MB6mu1pwTvePserVln3p2vzA?e=qiL6xB";
+            "https://proyectopie.000webhostapp.com/PIE/preguntas.xml";
 
 
     @Override
@@ -35,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
         btn_iniciar = (Button) findViewById(R.id.btn_iniciar);
         //ejecutamos el hilo
         new TareaDescargaXml().execute(URL);
+
+        System.out.println("***************************************el arrya de preguntas tiene.................. "+preguntas.size());
+
+        if(preguntas.size() == 0)
+        {
+            btn_iniciar.setEnabled(false);
+        }
 
         btn_iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
         EditText editText = (EditText) findViewById(R.id.et_nombre);
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
-        intent.putExtra("preguntas",preguntas);
+        intent.putExtra("listaPreguntas",preguntas);
+
         startActivity(intent);
     }
 
@@ -62,8 +70,10 @@ public class MainActivity extends AppCompatActivity {
             try {
                 return parsearXmlDeUrl(urls[0]);
             } catch (IOException e) {
+                System.out.println("**********************ERROR RED*********"+e);
                 return null; // null si hay error de red
             } catch (XmlPullParserException e) {
+                System.err.println("*************ERROR PARCHEANDO XML*********"+e);
                 return null; // null si hay error de parsing XML
             }
         }

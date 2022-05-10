@@ -37,7 +37,7 @@ public class ActivityPreguntas extends AppCompatActivity {
     ArrayList<Pregunta> preguntas;
     Pregunta preguntaAux;
     private final static String URL =
-            "https://educajcyl-my.sharepoint.com/:u:/g/personal/abraham_perbar_educa_jcyl_es/Ee53ixzYz_VFnuJYxNJph_MB6mu1pwTvePserVln3p2vzA?e=qiL6xB";
+            "https://proyectopie.000webhostapp.com/PIE/preguntas.xml";
           //  "C:\\ProyectoPIE\\preguntas.xml";
 
     @Override
@@ -60,11 +60,8 @@ public class ActivityPreguntas extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        Bundle bundle= getIntent().getExtras();
-
-        //nombre= bundle.getString("nombre");
         nombre = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        preguntas = (ArrayList<Pregunta>) bundle.get("preguntas");
+        preguntas = (ArrayList<Pregunta>) intent.getSerializableExtra("listaPreguntas");
         myToolbar.setTitle("Adelante "+ nombre);
         setSupportActionBar(myToolbar);
 

@@ -57,6 +57,15 @@ public class ParserXML {
             throws XmlPullParserException, IOException {
         List<Pregunta> listaPreguntas = new ArrayList<Pregunta>();
 
+        /*System.out.println("*******************leyendo el parser "+parser.getName());
+        System.out.println("*******************leyendo el parser "+parser.getText());
+
+        while (parser.next() != XmlPullParser.END_TAG) {
+            System.out.println("*******************leyendo el parser "+parser.getName());
+            System.out.println("*******************leyendo el parser "+parser.getText());
+            parser.next();
+        }*/
+
         parser.require(XmlPullParser.START_TAG, ns, ETI_CUESTIONES);
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
