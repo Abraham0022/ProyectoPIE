@@ -1,9 +1,6 @@
 package com.example.proyectopie;
 
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
+import static com.example.proyectopie.R.color.white;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,108 +10,114 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 
-import java.util.Locale;
+import java.util.ArrayList;
 
 public class ActivityPreguntas extends AppCompatActivity {
-    private BaseDatos baseDeDatos;
+
     private int numPregunta=0, aciertos=0;
     TextView preguntaTxt;
     RadioButton rbResp1, rbResp2, rbResp3;
     RadioGroup rgGrupo;
-    Button btn_iniciar;
+    Button btn_comprobar;
     String respuestaCorrecta, strResp;
     String nombre; //nombre insertado por el usuario en la activityyPrincipal
+    ArrayList<Pregunta> preguntas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        preguntas = new ArrayList<>();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preguntas);
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
-        myToolbar.setTitle("Adelante "+ nombre);
-        myToolbar.setTitleTextColor(ContextCompat.getColor(getBaseContext(),R.color.white)); //poner el texto del toolbar de color blanco
-        setSupportActionBar(myToolbar);
-
-        Locale localizacion = null;
-        String idioma = localizacion.getDefault().getLanguage();
-        baseDeDatos = new BaseDatos(idioma);
 
         Intent intent = getIntent();
         nombre = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-
-
+        preguntas = (ArrayList<Pregunta>) intent.getSerializableExtra("listaPreguntas");
+        myToolbar.setTitle("Adelante "+ nombre);
+        myToolbar.setTitleTextColor(ContextCompat.getColor(getApplicationContext(), white));
+        setSupportActionBar(myToolbar);
 
         preguntaTxt = findViewById(R.id.tv_pregunta);
         rbResp1 = findViewById(R.id.rbResp1);
         rbResp2 = findViewById(R.id.rbResp2);
         rbResp3 = findViewById(R.id.rbResp3);
-        cargarPregunta();
+        rgGrupo = findViewById(R.id.radioGroup);
+        mostrarPregunta();
 
-        btn_iniciar = findViewById(R.id.btnComprobar);
-        btn_iniciar.setOnClickListener(new View.OnClickListener() {
+        btn_comprobar = findViewById(R.id.btnComprobar);
+        btn_comprobar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(respuestaCorrecta.equals(strResp) ){
+                if(respuestaCorrecta.equalsIgnoreCase(strResp)){
                     aciertos++;
                 }
                 numPregunta++;
-                rbResp1.setChecked(false);
-                rbResp2.setChecked(false);
-                rbResp3.setChecked(false);
-                cargarPregunta();
+                rgGrupo.clearCheck();
+                mostrarPregunta();
 
             }
         });
-
-        //txtPrueba=findViewById(R.id.txtPrueba);
-
     }
-    protected void cargarPregunta(){
+
+    protected void mostrarPregunta(){
         //Hemos de intentar que esto funcione en random
 
-        if (baseDeDatos.cantidadPreguntas()>numPregunta){
-            preguntaTxt.setText(baseDeDatos.obtenerPregunta(numPregunta));
+        if((preguntas.size()-1) == numPregunta)
+        {
+            btn_comprobar.setText(R.string.str_btfinal);
+        }
 
-            rbResp1.setText(baseDeDatos.obtenerRespuesta1(numPregunta));
-            rbResp2.setText(baseDeDatos.obtenerRespuesta2(numPregunta));
-            rbResp3.setText(baseDeDatos.obtenerRespuesta3(numPregunta));
-            respuestaCorrecta = baseDeDatos.obtenerRespuestaCorrecta(numPregunta);
+        if (preguntas.size()>numPregunta){
+            preguntaTxt.setText(preguntas.get(numPregunta).getEnunciado());
+
+            rbResp1.setText(preguntas.get(numPregunta).getResp1());
+            rbResp2.setText(preguntas.get(numPregunta).getResp2());
+            rbResp3.setText(preguntas.get(numPregunta).getResp3());
+            respuestaCorrecta = preguntas.get(numPregunta).getSolucion();
 
         }else{
-         /*   Intent mostrarPuntuacion = new Intent (TestActivity.this, PuntuacionActivity.class);
-            mostrarPuntuacion.putExtra("nombre",nombreJugador);
-            mostrarPuntuacion.putExtra("puntos", puntuacion);
+            Intent mostrarPuntuacion = new Intent (ActivityPreguntas.this, PuntuacionActivity.class);
+            mostrarPuntuacion.putExtra("nombre",nombre);
+            mostrarPuntuacion.putExtra("puntos", aciertos);
+            mostrarPuntuacion.putExtra("total",preguntas.size());
             startActivity(mostrarPuntuacion);
-            finish();*/
-            preguntaTxt.setText("NO hay mas preguntas "+ nombre +" has acertado: " +aciertos);
+            finish();
+           // preguntaTxt.setText("NO hay mas preguntas "+ nombre +" has acertado: " +aciertos);
         }
+
     }
 
+
+    /*Lo utilizamos para guardar la respuesta marcada y asi despues poder comprobar si es la correcta*/
     public void onRadioBtnClik(View view){
-          // Is the button now checked?
+        // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
-    Toast toast = null;
+        Toast toast = null;
         // Check which radio button was clicked
         switch(view.getId()) {
             case R.id.rbResp1:
                 if (checked)
-                    // Pirates are the best
-                    strResp= (String)rbResp1.getText();
-                    //txtPrueba.setText(aciertos);
-                    break;
+                  strResp= (String)rbResp1.getText();
+                break;
             case R.id.rbResp2:
                 if (checked)
                     strResp= (String)rbResp2.getText();
-               // txtPrueba.setText(aciertos);
-                    break;
+                break;
             case R.id.rbResp3:
                 if (checked)
                     strResp= (String)rbResp3.getText();
-                //    txtPrueba.setText(aciertos);
-                    break;
+                break;
         }
     }
+
+
+
 }

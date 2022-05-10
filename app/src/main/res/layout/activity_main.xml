@@ -6,23 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/my_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:theme="@style/Theme.ProyectoPIE"
-        tools:ignore="MissingConstraints" />
-
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="fill_parent"
-        android:layout_height="47dp"
+        android:layout_width="413dp"
+        android:layout_height="76dp"
         android:text="@string/str_princip"
         android:textAlignment="center"
         android:textColor="#673AB7"
-        android:textSize="20sp"
+        android:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -39,11 +30,10 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="155dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="@string/str_pistaNombre"
+        android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        android:autofillHints="" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
         android:id="@+id/btn_iniciar"

@@ -13,18 +13,18 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/Theme.ProyectoPIE"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_pregunta"
-        android:layout_width="348dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="24dp"
+        android:layout_width="0dp"
+        android:layout_height="128dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="24dp"
-        android:text="@string/str_pregunta"
+        android:layout_marginEnd="20dp"
+        android:autoSizeTextType="uniform"
+        android:text="TextView"
         android:textAlignment="center"
-        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar" />
@@ -33,7 +33,7 @@
         android:id="@+id/radioGroup"
         android:layout_width="345dp"
         android:layout_height="166dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,37 +44,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onRadioBtnClik"
-            android:text="@string/str_respuesta"
-            tools:ignore="DuplicateSpeakableTextCheck" />
+            android:textSize="20sp"
+            android:text="RadioButton" />
 
         <RadioButton
             android:id="@+id/rbResp2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/str_respuesta"
-            android:onClick="onRadioBtnClik"/>
+            android:onClick="onRadioBtnClik"
+            android:textSize="20sp"
+            android:text="RadioButton" />
 
         <RadioButton
             android:id="@+id/rbResp3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/str_respuesta"
-            android:onClick="onRadioBtnClik"/>
+            android:onClick="onRadioBtnClik"
+            android:textSize="20sp"
+            android:text="RadioButton" />
     </RadioGroup>
 
     <Button
         android:id="@+id/btnComprobar"
+        style="@style/Theme.ProyectoPIE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="79dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="40dp"
         android:text="@string/str_btComprobar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

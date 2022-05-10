@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cuestiones>
+    <pregunta>
+        <enunciado>Elemento que permite el almacenamiento de información de forma transitoria</enunciado>
+        <resp1>RAM</resp1>
+        <resp2>VGA</resp2>
+        <resp3>CPU</resp3>
+        <solucion>RAM</solucion>
+    </pregunta>
+
+    <pregunta>
+        <enunciado>Elemento principal del ordenador que realiza los cálculos</enunciado>
+        <resp1>RAM</resp1>
+        <resp2>VGA</resp2>
+        <resp3>CPU</resp3>
+        <solucion>CPU</solucion>
+    </pregunta>
+
+    <pregunta>
+        <enunciado>Dispositivo que permite mostrar imagenees en pantalla</enunciado>
+        <resp1>RAM</resp1>
+        <resp2>VGA</resp2>
+        <resp3>CPU</resp3>
+        <solucion>VGA</solucion>
+    </pregunta>
+
+    <pregunta>
+        <enunciado>La información dentro del ordenador viaja por</enunciado>
+        <resp1>ROM</resp1>
+        <resp2>BUS</resp2>
+        <resp3>Placa Base</resp3>
+        <solucion>BUS</solucion>
+    </pregunta>
+    <pregunta>
+        <enunciado>En redes una topologia física se corresponde con</enunciado>
+        <resp1>Como piensan los equipos que están conectados</resp1>
+        <resp2>Como se conectan los equipos realmente</resp2>
+        <resp3>El tipo de tecnología que utilizo para conectarlos</resp3>
+        <solucion>Como se conectan los equipos realmente</solucion>
+    </pregunta>
+    <pregunta>
+        <enunciado>En un cable de par trenzado, que tipo de señales se utilizan</enunciado>
+        <resp1>Impulsos eléctricos</resp1>
+        <resp2>Pulsos luminosos</resp2>
+        <resp3>Ondas de radio</resp3>
+        <solucion>Impulsos eléctricos</solucion>
+    </pregunta>
+</cuestiones>
