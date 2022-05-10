@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ProyectPIE</string>
-    <string name="str_princip">Welcome to the computer super test</string>
+    <string name="str_princip">Welcome to the IT super test</string>
     <string name="str_pistaNombre">Introduce your name</string>
     <string name="str_btInicio">Start test</string>
-    <string name="str_btComprobar">Check quiz</string>
+    <string name="str_btComprobar">Next</string>
+    <string name="str_btfinal">Check quiz</string>
     <string name="str_respuesta">Answer</string>
     <string name="str_pregunta">Question</string>
 </resources>

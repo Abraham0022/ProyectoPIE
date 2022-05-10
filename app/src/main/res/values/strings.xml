@@ -5,5 +5,6 @@
     <string name="str_btInicio">Iniciar test</string>
     <string name="str_btComprobar">Siguiente</string>
     <string name="str_btfinal">Comprobar Resultado</string>
-
+    <string name="str_respuesta">Respuesta</string>
+    <string name="str_pregunta">Pregunta</string>
 </resources>
