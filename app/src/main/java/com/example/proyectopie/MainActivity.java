@@ -15,17 +15,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
     Button btn_iniciar;
     ArrayList<Pregunta> preguntas= new ArrayList<>() ;
     public static final String EXTRA_MESSAGE = "com.example.proyectopie.MESSAGE";
-    private final static String URL =
-            "https://proyectopie.000webhostapp.com/PIE/preguntas.xml";
+    private final static String URL = "https://proyectopie.000webhostapp.com/PIE/preguntas.xml";
 
 
     @Override
@@ -35,14 +34,17 @@ public class MainActivity extends AppCompatActivity {
 
         btn_iniciar = (Button) findViewById(R.id.btn_iniciar);
         //ejecutamos el hilo
+
         new TareaDescargaXml().execute(URL);
 
         System.out.println("***************************************el arrya de preguntas tiene.................. "+Pregunta.PREGUNTAS.size());
 
-        if(preguntas.size() == 0)
+        if (preguntas.isEmpty())
         {
             btn_iniciar.setEnabled(false);
         }
+
+
 
         btn_iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,9 +57,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void empezarTest(View v){
-        Intent intent = new Intent(this, ActivityPreguntas.class);
+
         EditText editText = (EditText) findViewById(R.id.et_nombre);
         String message = editText.getText().toString();
+        Intent intent = new Intent(MainActivity.this, ActivityPreguntas.class);
         intent.putExtra(EXTRA_MESSAGE, message);
         intent.putExtra("listaPreguntas",preguntas);
 
@@ -82,12 +85,16 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Pregunta> result) {
             // Actualizar contenido del proveedor de datos
-            //preguntas = (ArrayList<Pregunta>) result;
+            preguntas = (ArrayList<Pregunta>) result;
             System.out.println("*****************************onPostExecute result vale:"+result);
-            Pregunta.PREGUNTAS = result;
-            System.out.println("*****************************onPostExecute preguntas tiene:"+Pregunta.PREGUNTAS);
+            //Pregunta.PREGUNTAS = result;
+            System.out.println("*****************************onPostExecute preguntas tiene:"+preguntas);
             // Actualizar la vista del adaptador
            // adaptador.notifyDataSetChanged();
+            if ( preguntas.size() > 0 )
+            {
+                btn_iniciar.setEnabled(true);
+            }
         }
     }
 
