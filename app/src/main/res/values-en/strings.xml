@@ -8,4 +8,5 @@
     <string name="str_btfinal">Check quiz</string>
     <string name="str_respuesta">Answer</string>
     <string name="str_pregunta">Question</string>
+    <string name="str_fin">Exit</string>
 </resources>

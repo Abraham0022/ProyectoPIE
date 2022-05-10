@@ -7,6 +7,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 /**
  * Controla la actividad que muestra el resultado del test
@@ -15,9 +17,13 @@ import android.widget.TextView;
  * @version 1.0 05/2022
  */
 public class PuntuacionActivity extends AppCompatActivity {
-
+    Button btn_fin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_puntuacion);
 
@@ -44,7 +50,16 @@ public class PuntuacionActivity extends AppCompatActivity {
             resultTxt.setText("Ohh "+nombreJugador+ " has conseguido "+ puntuacion+ " de "+totalPreguntas+" intentalo de nuevo!");
         }
 
+        btn_fin = findViewById(R.id.btn_fin);
+        btn_fin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // getActivity().finish();
+                System.exit(0);
 
 
+            }
+        });
     }
+
 }
