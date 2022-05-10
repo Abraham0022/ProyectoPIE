@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 return null; // null si hay error de red
             } catch (XmlPullParserException e) {
                 System.err.println("*************ERROR PARCHEANDO XML*********"+e);
-                return null; // null si hay error de parsing XML
+                return null; // null si hay error de parsing XMLL
             }
         }
 
