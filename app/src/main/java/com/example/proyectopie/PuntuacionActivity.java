@@ -8,7 +8,12 @@ import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
 import android.widget.TextView;
-
+/**
+ * Controla la actividad que muestra el resultado del test
+ * @author Ruben Mena Aparicio
+ * @author Abraham Pérez Barrera
+ * @version 1.0 05/2022
+ */
 public class PuntuacionActivity extends AppCompatActivity {
 
     @Override

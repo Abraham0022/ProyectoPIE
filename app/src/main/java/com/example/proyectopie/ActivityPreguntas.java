@@ -16,6 +16,12 @@ import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 
+/**
+ * Controla la actividad que muestra las preguntas del test
+ * @author Abraham Pérez Barrera
+ * @author Ruben Mena Aparicio
+ * @version 1.0 05/2022
+ */
 public class ActivityPreguntas extends AppCompatActivity {
 
     private int numPregunta=0, aciertos=0;
@@ -68,10 +74,7 @@ public class ActivityPreguntas extends AppCompatActivity {
     }
 
     protected void mostrarPregunta(){
-        //Hemos de intentar que esto funcione en random
-
-        if((preguntas.size()-1) == numPregunta)
-        {
+        if((preguntas.size()-1) == numPregunta){
             btn_comprobar.setText(R.string.str_btfinal);
         }
 
@@ -90,7 +93,7 @@ public class ActivityPreguntas extends AppCompatActivity {
             mostrarPuntuacion.putExtra("total",preguntas.size());
             startActivity(mostrarPuntuacion);
             finish();
-           // preguntaTxt.setText("NO hay mas preguntas "+ nombre +" has acertado: " +aciertos);
+
         }
 
     }

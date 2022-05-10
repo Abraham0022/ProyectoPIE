@@ -4,6 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Representa cada una de las preguntas del test
+ * @author Abraham Pérez Barrera
+ * @author Ruben Mena Aparicio
+ * @version 1.0 05/2022
+ */
 public class Pregunta implements Serializable {
     private String enunciado;
     private String resp1;
@@ -11,19 +17,6 @@ public class Pregunta implements Serializable {
     private String resp3;
     private String solucion;
 
-
-    // Proveedor estático de datos para el adaptador
-    public static List<Pregunta> PREGUNTAS = new ArrayList<>();
-/*
-    public static Pregunta getItem(int id) {
-        for (Hotel item : HOTELES) {
-            if (item.getIdHotel() == id) {
-                return item;
-            }
-        }
-        return null;
-    }
-*/
 
     public Pregunta(String enunciado, String resp1, String resp2, String resp3, String solucion) {
         this.enunciado = enunciado;

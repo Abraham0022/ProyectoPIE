@@ -17,12 +17,18 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Controla la actividad principal
+ * @author Ruben Mena Aparicio
+ * @author Abraham Pérez Barrera
+ * @version 1.0 05/2022
+ */
 public class MainActivity extends AppCompatActivity {
 
     Button btn_iniciar;
     ArrayList<Pregunta> preguntas= new ArrayList<>() ;
     public static final String EXTRA_MESSAGE = "com.example.proyectopie.MESSAGE";
+    //direccion donde esta guardado el archivo XML
     private final static String URL = "https://proyectopie.000webhostapp.com/PIE/preguntas.xml";
 
 
@@ -33,10 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         btn_iniciar = findViewById(R.id.btn_iniciar);
         //ejecutamos el hilo
-
         new TareaDescargaXml().execute(URL);
-
-        System.out.println("***************************************el arrya de preguntas tiene.................. "+Pregunta.PREGUNTAS.size());
 
         if (preguntas.isEmpty()) {
             btn_iniciar.setEnabled(false);
@@ -49,17 +52,23 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Crea el intent que arrancará y pasara datos la Actividad @see ActovotyPreguntas
+     * @param v
+     */
     public void empezarTest(View v){
+        EditText nombreTxt = findViewById(R.id.et_nombre);
+        String nombreUsuario = nombreTxt.getText().toString();
+        Intent actividadPreguntas = new Intent(MainActivity.this, ActivityPreguntas.class);
 
-        EditText editText = findViewById(R.id.et_nombre);
-        String message = editText.getText().toString();
-        Intent intent = new Intent(MainActivity.this, ActivityPreguntas.class);
-        intent.putExtra(EXTRA_MESSAGE, message);
-        intent.putExtra("listaPreguntas",preguntas);
-
-        startActivity(intent);
+        actividadPreguntas.putExtra(EXTRA_MESSAGE, nombreUsuario);
+        actividadPreguntas.putExtra("listaPreguntas", this.preguntas);
+        startActivity(actividadPreguntas);
     }
 
+    /**
+     * Crea el hilo encargado de descargar el fichero XML
+     */
     private class TareaDescargaXml extends AsyncTask<String, Void, List<Pregunta>> {
 
         @Override
@@ -67,11 +76,9 @@ public class MainActivity extends AppCompatActivity {
             try {
                 return parsearXmlDeUrl(urls[0]);
             } catch (IOException e) {
-                System.out.println("**********************ERROR RED*********"+e);
-                return null; // null si hay error de red
+               return null; // null si hay error de red
             } catch (XmlPullParserException e) {
-                System.err.println("*************ERROR PARCHEANDO XML*********"+e);
-                return null; // null si hay error de parsing XMLL
+               return null; // null si hay error de parsing XMLL
             }
         }
 
@@ -79,26 +86,27 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(List<Pregunta> result) {
             // Actualizar contenido del proveedor de datos
             preguntas = (ArrayList<Pregunta>) result;
-            System.out.println("*****************************onPostExecute result vale:"+result);
-
-            System.out.println("*****************************onPostExecute preguntas tiene:"+preguntas);
-
-            if ( preguntas.size() > 0 )
-            {
+          if ( preguntas.size() > 0 ){
                 btn_iniciar.setEnabled(true);
-            }
+          }
         }
     }
 
-    private List<Pregunta> parsearXmlDeUrl(String urlString)
-            throws XmlPullParserException, IOException {
+    /**
+     * Traduce el fichero XML @see ParserXML a una lista de perguntas @see Preguntas
+     * @param urlString Dirección donde se encuentra el archivo
+     * @return Lista con las preguntas que contiene el XML
+     * @throws XmlPullParserException si el fichero no se corresponde con la estructura necesaria
+     * @throws IOException Si el fichero no se puede descargar
+     */
+    private List<Pregunta> parsearXmlDeUrl(String urlString) throws XmlPullParserException, IOException {
         InputStream stream = null;
         ParserXML parserXml = new ParserXML();
-        List<Pregunta> entries = null;
+        List<Pregunta> preguntas = null;
 
         try {
             stream = descargarContenido(urlString);
-            entries = parserXml.parsear(stream);
+            preguntas = parserXml.parsear(stream);
 
         } finally {
             if (stream != null) {
@@ -106,9 +114,15 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        return entries;
+        return preguntas;
     }
 
+    /**
+     * crea la conexión con la URL
+     * @param urlString Dirección donde se encuentra el archivo
+     * @return Un flujo de entrada con el contenido del fichero
+     * @throws IOException
+     */
     private InputStream descargarContenido(String urlString) throws IOException {
         URL url = new URL(urlString);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();

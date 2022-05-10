@@ -9,7 +9,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Contiene los métodos para traducir el fichero XML en una lista de preguntas
+ * @author Ruben Mena Aparicio
+ * @author Abraham Pérez Barrera
+ * @version 1.0 05/2022
+ */
 public class ParserXML {
   // Namespace general. null si no existe
     private static final String ns = null;
@@ -57,15 +62,6 @@ public class ParserXML {
             throws XmlPullParserException, IOException {
         List<Pregunta> listaPreguntas = new ArrayList<Pregunta>();
 
-        /*System.out.println("*******************leyendo el parser "+parser.getName());
-        System.out.println("*******************leyendo el parser "+parser.getText());
-
-        while (parser.next() != XmlPullParser.END_TAG) {
-            System.out.println("*******************leyendo el parser "+parser.getName());
-            System.out.println("*******************leyendo el parser "+parser.getText());
-            parser.next();
-        }*/
-
         parser.require(XmlPullParser.START_TAG, ns, ETI_CUESTIONES);
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
@@ -96,8 +92,6 @@ public class ParserXML {
         String resp2 = null;
         String resp3 = null;
         String solucion = null;
-
-        //   HashMap<String, String> valoracion = new HashMap<>();
 
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
@@ -169,7 +163,7 @@ public class ParserXML {
     }
     /*
 
-    // Procesa las etiqueta <urlImagen> de los hoteles
+    // Procesa las etiqueta <urlImagen> de las preguntas
     private String leerUrlImagen(XmlPullParser parser) throws IOException, XmlPullParserException {
         String urlImagen;
         parser.require(XmlPullParser.START_TAG, ns, ETIQUETA_URL_IMAGEN);
@@ -177,8 +171,8 @@ public class ParserXML {
         parser.require(XmlPullParser.END_TAG, ns, ETIQUETA_URL_IMAGEN);
         return urlImagen;
     }
-
     */
+
     // Obtiene el texto de los atributos
     private static  String obtenerTexto(XmlPullParser parser) throws IOException, XmlPullParserException {
         String resultado = "";
@@ -189,7 +183,7 @@ public class ParserXML {
         return resultado;
     }
 
-    // Salta aquellos objeteos que no interesen en la jerarquía XML.
+    // Salta aquellas etiquetas que no interesen en la jerarquía XML.
     private static void saltarEtiqueta(XmlPullParser parser) throws XmlPullParserException, IOException {
         if (parser.getEventType() != XmlPullParser.START_TAG) {
             throw new IllegalStateException();
