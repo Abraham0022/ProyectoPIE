@@ -1,6 +1,10 @@
 package com.example.proyectopie;
 
-public class Pregunta {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Pregunta implements Serializable {
     private String enunciado;
     private String resp1;
     private String resp2;
@@ -8,7 +12,20 @@ public class Pregunta {
     private String solucion;
 
 
-        public Pregunta(String enunciado, String resp1, String resp2, String resp3, String solucion) {
+    // Proveedor estático de datos para el adaptador
+    public static List<Pregunta> PREGUNTAS = new ArrayList<>();
+/*
+    public static Pregunta getItem(int id) {
+        for (Hotel item : HOTELES) {
+            if (item.getIdHotel() == id) {
+                return item;
+            }
+        }
+        return null;
+    }
+*/
+
+    public Pregunta(String enunciado, String resp1, String resp2, String resp3, String solucion) {
         this.enunciado = enunciado;
         this.resp1 = resp1;
         this.resp2 = resp2;
@@ -16,8 +33,7 @@ public class Pregunta {
         this.solucion = solucion;
     }
 
-    public Pregunta()
-    {
+    public Pregunta(){
         this.enunciado = "";
         this.resp1 = "";
         this.resp2 = "";
