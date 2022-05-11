@@ -3,16 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android/ProyectoPIE/app/src/main/res/layout/activity_puntuacion.xml" value="0.36102564102564105" />
         <entry key="..\:/ProyectoPIE/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/ProyectoPIE/app/src/main/res/layout/activity_preguntas.xml" value="0.25" />
+        <entry key="..\:/ProyectoPIE/app/src/main/res/layout/activity_puntuacion.xml" value="0.2604166666666667" />
         <entry key="..\:/ProyectoPIE/app/src/main/res/layout/probandotoolbar.xml" value="0.20520833333333333" />
         <entry key="..\:/ProyectoPIE/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/Abraham/OneDrive - Educacyl/ProyectoPIE/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Ruben/StudioProjects/ProyectoPIE/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Ruben/StudioProjects/ProyectoPIE/app/src/main/res/layout/activity_preguntas.xml" value="0.33" />
-        <entry key="..\:/Users/Ruben/StudioProjects/ProyectoPIE/app/src/main/res/layout/pruebatool.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/Ruben/StudioProjects/ProyectoPIE/app/src/main/res/layout/toolbar.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Ruben/StudioProjects/ProyectoPIEFINAL/app/src/main/res/layout/activity_main.xml" value="0.1956521739130435" />
+        <entry key="..\:/Users/Ruben/StudioProjects/ProyectoPIEFINAL/app/src/main/res/layout/activity_preguntas.xml" value="0.1956521739130435" />
+        <entry key="..\:/Users/Ruben/StudioProjects/ProyectoPIENuevoGIT/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3675" />
+        <entry key="..\:/Users/Ruben/StudioProjects/ProyectoPIENuevoGIT/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3675" />
+        <entry key="..\:/Users/Ruben/StudioProjects/ProyectoPIENuevoGIT/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Ruben/StudioProjects/ProyectoPIENuevoGIT/app/src/main/res/layout/activity_preguntas.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Ruben/StudioProjects/ProyectoPIENuevoGIT/app/src/main/res/layout/activity_puntuacion.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
